@@ -21,5 +21,16 @@ class QuotesModel {
 class Quote {
   int? id;
   String quote;
+  String author;
 
+  Quote({
+    this.id,
+    required this.quote,
+    required this.author
+});
+  factory Quote.fromJson(Map<String , dynamic> data) => Quote(
+    id: data['id'],
+      quote: data['quote'],
+      author: data['author']
+  );
 }

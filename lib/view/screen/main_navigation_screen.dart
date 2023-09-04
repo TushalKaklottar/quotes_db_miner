@@ -43,12 +43,12 @@ class Navigation_Screen extends StatelessWidget {
                   label: "Home"
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.home),
-                  label: "Home"
+                    icon: Icon(CupertinoIcons.add_circled_solid),
+                  label: "Add"
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.home),
-                  label: "Home"
+                    icon: Icon(CupertinoIcons.square_favorites),
+                  label: "favourite"
                 ),
               ],
             ),
