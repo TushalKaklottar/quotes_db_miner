@@ -25,7 +25,7 @@ class DB_helper {
 
   init() async {
     String dbPath = await getDatabasesPath();
-    String dbName = 'qu.db';
+    String dbName = 'qut.db';
     String path = join(dbPath,dbName);
 
 
