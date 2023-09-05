@@ -26,7 +26,7 @@ class Quote {
   Quote({
     this.id,
     required this.quote,
-    required this.author
+    required this.author,
 });
   factory Quote.fromJson(Map<String , dynamic> data) => Quote(
     id: data['id'],
