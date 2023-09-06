@@ -9,7 +9,7 @@ class Home_component extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.black,
+        color: Colors.amber,
       ),
     );
   }

@@ -1,26 +1,33 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
+import 'package:quotes_db_miner/controller/database_check_controller.dart';
+import 'package:quotes_db_miner/model/category_database_models.dart';
 import 'package:quotes_db_miner/model/quotes_model.dart';
+import 'package:quotes_db_miner/utils/attributes.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DB_helper {
 
+  //singleton class
   DB_helper._();
   DB_helper db_helper = DB_helper._();
+  // var
   Database? db;
 
+
+  // local_json
   Future<List<QuotesModel>> LocalJsonDataLoad() async {
 
     String JsonPath = "assets/json/quotes_file.json";
     String JsonData = await rootBundle.loadString(JsonPath);
 
     List decoded = jsonDecode(JsonData);
-
     List<QuotesModel> Category = decoded.map((e) => QuotesModel.fromJson(e)).toList();
-
     return Category;
   }
+
+  //database table
 
   Future init() async {
     String dbPath = await getDatabasesPath();
@@ -39,6 +46,9 @@ class DB_helper {
           await db.execute(query2);
       });
 
+
+    // category Insert
+    // Quotes_model
    Future categoryInsert() async {
      await init();
 
@@ -60,9 +70,41 @@ class DB_helper {
             Category[i].quotes[j].quote,
             Category[i].quotes[j].author,
           ];
-          db!.rawInsert(query2,args);
+          await db!.rawInsert(query2,args);
         }
       }
    }
+
+
+   // 1).Category_data_model
+    // insert value
+
+   Future<List<CategoryDataModel>> fatchAllCategory() async {
+     await init();
+
+     DataBaseCheckController dataBaseCheckController = DataBaseCheckController();
+
+     if(data.read("isInsert") != true) {
+       await categoryInsert();
+     }
+     dataBaseCheckController.InsertInValue();
+
+     String query = "SELECT * FROM category;";
+
+     List<Map<String,dynamic>> res = await db!.rawQuery(query);
+
+     List<CategoryDataModel> allCategory =  res.map((e) => CategoryDataModel.fromMap(data: e)).toList();
+     return allCategory;
+   }
+
+
+   // 2).Category_data_model
+    // search value
+
+    fetchSearchCategory({required String data}) async {
+     await init();
+     String query = "SELECT * FROM category WHERE category ";
+
+
   }
 }

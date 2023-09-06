@@ -39,6 +39,7 @@ dependencies:
   google_fonts: any
   path: any
   sqflite: any
+  get_storage: ^2.1.1
 
 
 dev_dependencies:
