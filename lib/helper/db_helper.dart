@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:quotes_db_miner/controller/database_check_controller.dart';
 import 'package:quotes_db_miner/model/category_database_models.dart';
-import 'package:quotes_db_miner/model/quotes_model.dart';
+import 'package:quotes_db_miner/model/quotes_database_model.dart';
+import 'package:quotes_db_miner/model/1).quotes_modal.dart';
 import 'package:quotes_db_miner/utils/attributes.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -34,10 +35,7 @@ class DB_helper {
     String dbName = 'qut.db';
     String path = join(dbPath,dbName);
 
-    db = await openDatabase(
-        path,
-      version: 1,
-      onCreate: (db,_) async {
+    db = await openDatabase(path, version: 1, onCreate: (db,_) async {
           String query = "CREATE TABLE IF NOT EXISTS category(id INTEGER, category_tittle TEXT NOT NULL);";
 
           String query2 = "CREATE TABLE IF NOT EXISTS quotes(id INTEGER ,quote TEXT NOT NULL,author TEXT NOT NULL);";
@@ -62,7 +60,7 @@ class DB_helper {
        await db!.rawInsert(query,args);
       }
 
-      for(int i=0; i<Category.length; i++) {
+      for(int i=0; i < Category.length; i++) {
         for(int j=0; j<Category[i].quotes.length; j++) {
           String query2 = "INSERT INTO quotes(id,quote,author)VALUES(?,?,?);";
           List args = [
@@ -101,10 +99,32 @@ class DB_helper {
    // 2).Category_data_model
     // search value
 
-    fetchSearchCategory({required String data}) async {
-     await init();
-     String query = "SELECT * FROM category WHERE category ";
+   Future<List<CategoryDataModel>> fetchSearchCategory({required String data}) async {
+      await init();
+      String query = "SELECT * FROM category WHERE category_name LIKE '%$data%'";
+
+      List<Map<String, dynamic>> res = await db!.rawQuery(query);
+
+      List<CategoryDataModel> query1 = res.map((e) =>
+          CategoryDataModel.fromMap(data: e)).toList();
+      return query1;
+    }
 
 
+    // QuotesDatabaseModel
+
+   Future<List<QuotesDataModel>> fatchAllQuote({required int id}) async {
+     init();
+
+     String query = "SELECT * FROM quotes WHERE id = ?;";
+
+     List args = [id];
+
+     List<Map<String,dynamic>> res =  await db!.rawQuery(query,args);
+
+     List<QuotesDataModel> allQuotes = res.map((e) => QuotesDataModel.fromMap(data: e)).toList();
+
+     return allQuotes;
+   }
   }
 }

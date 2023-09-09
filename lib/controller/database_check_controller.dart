@@ -10,7 +10,6 @@ class DataBaseCheckController extends GetxController {
     dataBaseCheckModel.isInsert = true;
 
     data.write("isInsert", dataBaseCheckModel.isInsert);
-
     update();
   }
 

@@ -40,6 +40,9 @@ dependencies:
   path: any
   sqflite: any
   get_storage: ^2.1.1
+  shared_preferences: ^2.2.1
+  http:
+  animated_splash_screen: ^1.3.0
 
 
 dev_dependencies:
