@@ -5,10 +5,8 @@ class Add_component extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-      ),
+    return Container(
+      color: Colors.red,
     );
   }
 }

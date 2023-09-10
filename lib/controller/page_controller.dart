@@ -18,4 +18,5 @@ class NavigationController extends GetxController {
          curve: Curves.easeOut,
      );
    }
+
 }
