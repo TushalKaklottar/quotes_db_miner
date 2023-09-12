@@ -4,7 +4,6 @@ import 'package:quotes_db_miner/component/home_component.dart';
 import 'package:quotes_db_miner/controller/page_controller.dart';
 import 'package:get/get.dart';
 import 'package:quotes_db_miner/utils/app_color.dart';
-
 import '../../component/add_component.dart';
 
 class Navigation_Screen extends StatelessWidget {
@@ -14,14 +13,13 @@ class Navigation_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         body: PageView(
           onPageChanged: (index) {
             controller.Change_Inedex(index: index);
           },
           controller: controller.pageController,
-          children: const [
+          children:  [
             Home_component(),
             Add_component(),
             Home_component(),
@@ -53,7 +51,6 @@ class Navigation_Screen extends StatelessWidget {
               ],
             ),
         ),
-      ),
     );
   }
 }
