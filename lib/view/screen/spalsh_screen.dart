@@ -14,7 +14,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
   Widget build(BuildContext context) {
 
     Timer(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
             () {
           Get.offNamed('/home');
     });

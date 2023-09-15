@@ -33,7 +33,7 @@ class DB_helper {
 
   Future init() async {
     String dbPath = await getDatabasesPath();
-    String path = join(dbPath,'qut.db');
+    String path = join(dbPath,'qute.db');
 
     db = await openDatabase(path,version: 1, onCreate: (db,_) {
       String query = "CREATE TABLE IF NOT EXISTS category(id INTEGER, category_tittle TEXT NOT NULL);";

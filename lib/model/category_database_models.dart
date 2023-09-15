@@ -7,7 +7,7 @@ class CategoryDataModel {
       required this.category_name,
 });
 
-   factory CategoryDataModel.fromMap({ required Map data}) {
+   factory CategoryDataModel.fromMap({required Map data}) {
       return CategoryDataModel(
           id: data['id'],
           category_name: data['category_name']

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:quotes_db_miner/view/screen/detail_screen.dart';
 import 'package:quotes_db_miner/view/screen/main_navigation_screen.dart';
 import 'package:quotes_db_miner/view/screen/spalsh_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/',
-          page: () => const Splash_Screen(),
+          page: () =>  Splash_Screen(),
         ),
 
         GetPage(
@@ -39,7 +40,12 @@ class MyApp extends StatelessWidget {
             page: () =>  Navigation_Screen(),
           transition: Transition.downToUp,
           curve: Curves.easeInOutCirc,
-        )
+        ),
+
+        GetPage(
+            name:  '/detail',
+            page: () => Detail_Screen(),
+        ),
 
       ],
     );
