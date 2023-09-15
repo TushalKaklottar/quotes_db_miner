@@ -1,6 +1,6 @@
 import '../model/attributes_modal.dart';
 import 'package:get/get.dart';
-import '../utils/image_list.dart';
+import '../utils/list.dart';
 
 class AttributesController extends GetxController {
 

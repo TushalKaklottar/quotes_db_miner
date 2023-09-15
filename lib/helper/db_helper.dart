@@ -4,6 +4,7 @@ import 'package:path/path.dart';
 import 'package:quotes_db_miner/controller/database_check_controller.dart';
 import 'package:quotes_db_miner/model/1).quotes_modal.dart';
 import 'package:quotes_db_miner/model/category_database_models.dart';
+import 'package:quotes_db_miner/model/quote_modal.dart';
 import 'package:quotes_db_miner/model/quotes_database_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:http/http.dart' as http;
@@ -128,12 +129,13 @@ class APIHelper {
   APIHelper._();
   static final APIHelper apiHelper = APIHelper._();
 
-  Future<QuotesModel?> fetchQuotes() async {
+  Future<QuoteModal?> fetchQuote() async {
     String baseUrl = "http://api.quotable.io/random";
+    
     http.Response response = await http.get(Uri.parse(baseUrl));
     if(response.statusCode == 200) {
-      Map<String,dynamic> decodedData = jsonDecode(response.body);
-      QuotesModel quotesData = QuotesModel.fromJson(decodedData);
+      Map<String,dynamic> decodeData = jsonDecode(response.body);
+      QuoteModal quotesData = QuoteModal.fromMap(decodeData);
       return quotesData;
     }
     return null;
