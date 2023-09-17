@@ -1,18 +1,18 @@
-class CategoryDataModel {
+class CategoryDatabaseModel {
    int id;
    String category_name;
 
-   CategoryDataModel({
+
+   CategoryDatabaseModel({
       required this.id,
       required this.category_name,
-});
+   });
 
-   factory CategoryDataModel.fromMap({required Map data}) {
-      return CategoryDataModel(
-          id: data['id'],
-          category_name: data['category_name']
+   factory CategoryDatabaseModel.formMap({required Map data}) {
+      return CategoryDatabaseModel(
+         id: data['id'],
+         category_name: data['category_name'],
       );
    }
 }
-
 

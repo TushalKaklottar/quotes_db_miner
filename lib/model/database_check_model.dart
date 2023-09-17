@@ -1,4 +1,5 @@
 class DataBaseCheckModel {
+
   bool isInsert;
 
   DataBaseCheckModel({

@@ -1,31 +1,27 @@
-import '../model/attributes_modal.dart';
 import 'package:get/get.dart';
-import '../utils/list.dart';
+import 'package:quotes_db_miner/model/attributes_modal.dart';
+import 'package:quotes_db_miner/utils/list.dart';
 
 class AttributesController extends GetxController {
 
-  var attributesModel = AttributesModel(
-  id: 0,
-  categoryname: "Quotes_love",
-  image: images[0]
-  ).obs;
+  AttributesModel attributesModel = AttributesModel(
+      id: 0,
+      categoryname: "Love",
+      image: images[0]
+  );
 
-
-  void getImage({required String img}) {
-    attributesModel.update((model) {
-      model?.image = img;
-    });
+  getImage({required String img}) {
+    attributesModel.image = img;
+    update();
   }
 
-  void getCategoryId({required int val}) {
-    attributesModel.update((model) {
-      model?.id = val;
-    });
+  getCategoryId({required int val}) {
+    attributesModel.id = val;
+    update();
   }
 
-  void getCategoryName({required String val}) {
-    attributesModel.update((model) {
-      model?.categoryname = val;
-    });
+  getCategoryName({required String val}) {
+    attributesModel.categoryname = val;
+    update();
   }
 }

@@ -1,18 +1,18 @@
-class QuotesDataModel {
+class QuotesDatabaseModel {
 
   int? id;
   String quotes;
   String author;
 
 
-  QuotesDataModel ({
+  QuotesDatabaseModel ({
     required this.id,
     required this.quotes,
     required this.author,
 });
 
-  factory QuotesDataModel.fromMap({required Map data}) {
-    return QuotesDataModel(
+  factory QuotesDatabaseModel.fromMap({required Map data}) {
+    return QuotesDatabaseModel(
         id: data['id'],
         quotes: data['quotes'],
         author: data['author']

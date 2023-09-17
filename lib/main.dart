@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             name: '/home',
             page: () =>  Navigation_Screen(),
           transition: Transition.downToUp,
-          curve: Curves.easeInOutCirc,
+          curve: Curves.easeInOutCubic,
         ),
 
         GetPage(

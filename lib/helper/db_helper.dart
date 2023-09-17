@@ -1,70 +1,81 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
-import 'package:path/path.dart';
-import 'package:quotes_db_miner/controller/database_check_controller.dart';
-import 'package:quotes_db_miner/model/1).quotes_modal.dart';
-import 'package:quotes_db_miner/model/category_database_models.dart';
+
+
 import 'package:quotes_db_miner/model/quote_modal.dart';
+import 'package:quotes_db_miner/controller/database_check_controller.dart';
+import 'package:quotes_db_miner/model/category_database_models.dart';
 import 'package:quotes_db_miner/model/quotes_database_model.dart';
+import 'package:flutter/services.dart';
+
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
-import '../utils/attributes.dart';
+import 'package:quotes_db_miner/model/quotes_modal.dart';
+import 'package:quotes_db_miner/utils/attributes.dart';
 
-class DB_helper {
 
 
-  DB_helper._();
-  static final DB_helper db_helper = DB_helper._();
-
+class DBHelper {
+  DBHelper._();
+  static final DBHelper dbHelper = DBHelper._();
   Database? db;
+
 
   Future<List<QuotesModel>> LocalJsonDataLoad() async {
 
     String JsonPath = "assets/json/quotes_file.json";
-    String JsonData = await rootBundle.loadString(JsonPath);
+    String jsonData = await rootBundle.loadString(JsonPath);
 
-    List decoded = jsonDecode(JsonData);
+    List decodedList = jsonDecode(jsonData);
+
     List<QuotesModel> Category =
-        decoded.map((e) => QuotesModel.fromJson(e)).toList();
+        decodedList.map((e) => QuotesModel.fromJson(e)).toList();
 
     return Category;
   }
 
 
 
-  Future init() async {
+
+  Future initDB() async {
     String dbPath = await getDatabasesPath();
-    String path = join(dbPath,'qute.db');
+    String path = join(dbPath,'Quote.db');
 
-    db = await openDatabase(path,version: 1, onCreate: (db,_) {
-      String query = "CREATE TABLE IF NOT EXISTS category(id INTEGER, category_tittle TEXT NOT NULL);";
 
-      String query2 = "CREATE TABLE IF NOT EXISTS quotes(id INTEGER ,quote TEXT NOT NULL,author TEXT NOT NULL);";
+    db = await openDatabase(path,version: 1,onCreate: (db,_) async {
+      String query =
+          "CREATE TABLE IF NOT EXISTS category(id INTEGER, category_name TEXT NOT NULL);";
 
-      db.execute(query);
-      db.execute(query2);
+      String query2 =
+          "CREATE TABLE IF NOT EXISTS quotes(id INTEGER, quote TEXT NOT NULL, author TEXT NOT NULL);";
+
+      await db.execute(query);
+      await db.execute(query2);
     });
   }
 
 
 
-  insertCategory() async {
-   await init();
 
+  Future insertCategory() async {
+    initDB();
     List<QuotesModel> Category = await LocalJsonDataLoad();
 
     for(int i = 0; i < Category.length; i++) {
-      String query = "INSERT INTO category(id, category_tittle)VALUES(?,?);";
+      String query = "INSERT INTO category(id,category_name)VALUES(?,?);";
+
       List args = [
         Category[i].id,
-        Category[i].category
+        Category[i].category,
       ];
       await db!.rawInsert(query,args);
     }
 
-    for(int i= 0; i < Category.length; i++) {
-      for(int j=0; j<Category[i].quotes.length; j++) {
+    for(int i = 0; i < Category.length; i++) {
+      for(int j = 0; j < Category[i].quotes.length; j++) {
+
         String query2 = "INSERT INTO quotes(id,quote,author)VALUES(?,?,?);";
+
         List args = [
           Category[i].quotes[j].id,
           Category[i].quotes[j].quote,
@@ -76,67 +87,67 @@ class DB_helper {
   }
 
 
-Future<List<CategoryDataModel>> fatchAllCategory() async {
-
-    await init();
+  Future<List<CategoryDatabaseModel>> fetchAllCategory() async {
+    await initDB();
 
     DataBaseCheckController dataBaseCheckController = DataBaseCheckController();
-
     if(data.read("isInsert") != true) {
       await insertCategory();
     }
     dataBaseCheckController.InsertInValue();
+
     String query = "SELECT * FROM category;";
 
     List<Map<String,dynamic>> res = await db!.rawQuery(query);
 
-    List<CategoryDataModel> allCategory =
-    res.map((e) => CategoryDataModel.fromMap(data: e)).toList();
-
+    List<CategoryDatabaseModel> allCategory =
+        res.map((e) => CategoryDatabaseModel.formMap(data: e)).toList();
     return allCategory;
-}
+  }
 
 
-  Future<List<CategoryDataModel>> fetchSearchCategory({required String data}) async {
-    await init();
 
-    String query = "SELECT * FROM category WHERE category_name LIKE '%$data%'";
+  Future<List<CategoryDatabaseModel>> fetchSearchCategories({required int data}) async{
+    initDB();
+
+    String query = "SELECT * FROM category WHERE category_name LIKE '%$data%';";
 
     List<Map<String,dynamic>> res = await db!.rawQuery(query);
 
-    List<CategoryDataModel> query1 = res.map((e) => CategoryDataModel.fromMap(data: e)).toList();
+    List<CategoryDatabaseModel> query1 = res.map((e) => CategoryDatabaseModel.formMap(data: e)).toList();
+
     return query1;
   }
 
 
 
-  Future<List<QuotesDataModel>> fatchAllQuotes({required int id}) async {
-    await init();
-
+  Future<List<QuotesDatabaseModel>> fetchAllQuotes({required int id}) async {
     String query = "SELECT * FROM quotes WHERE id = ?;";
 
     List args = [id];
 
-    List<Map<String,dynamic>> res = await db!.rawQuery(query,args);
+    List<Map<String,dynamic>> res = await  db!.rawQuery(query,args);
 
-    List<QuotesDataModel> allQuotes = res.map((e) => QuotesDataModel.fromMap(data: e)).toList();
+   List<QuotesDatabaseModel> allQuotes =  res.map((e) => QuotesDatabaseModel.fromMap(data: e)).toList();
 
     return allQuotes;
   }
 }
 
-class APIHelper {
+
+class APIHelper{
   APIHelper._();
+
   static final APIHelper apiHelper = APIHelper._();
 
   Future<QuoteModal?> fetchQuote() async {
     String baseUrl = "http://api.quotable.io/random";
-    
     http.Response response = await http.get(Uri.parse(baseUrl));
+
     if(response.statusCode == 200) {
-      Map<String,dynamic> decodeData = jsonDecode(response.body);
-      QuoteModal quotesData = QuoteModal.fromMap(decodeData);
-      return quotesData;
+      Map<String,dynamic> decodedData = jsonDecode(response.body);
+      QuoteModal quoteData = QuoteModal.fromMap(decodedData);
+      return quoteData;
     }
     return null;
   }
