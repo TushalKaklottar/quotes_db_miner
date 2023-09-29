@@ -5,12 +5,14 @@ class QuoteModal {
   String content;
   String author;
   String authorSlug;
+  String text;
 
   QuoteModal({
     required this.id,
     required this.content,
     required this.author,
     required this.authorSlug,
+    required this.text,
 });
 
   factory QuoteModal.fromMap(Map<String,dynamic> data) {
@@ -18,7 +20,8 @@ class QuoteModal {
         id: data['_id'],
         content: data['content'],
         author: data['author'],
-        authorSlug: data['authorSlug']
+        authorSlug: data['authorSlug'],
+        text: data['text'],
     );
   }
 }
