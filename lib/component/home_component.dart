@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quotes_db_miner/helper/db_helper.dart';
 import 'package:quotes_db_miner/model/category_database_models.dart';
 import 'package:quotes_db_miner/model/quote_modal.dart';
+import 'package:quotes_db_miner/utils/app_color.dart';
 import 'package:quotes_db_miner/utils/attributes.dart';
 import 'package:quotes_db_miner/utils/list.dart';
 import '../controller/attributes_controller.dart';
@@ -82,9 +84,9 @@ class _Home_componentState extends State<Home_component> {
                                 itemCount: homeController.images.length,
                                 itemBuilder: (context, index, realIndex) {
                                   return Padding(
-                                    padding: const EdgeInsets.all(5), // Adjust the padding as needed
+                                    padding: const EdgeInsets.all(5),
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10), // Adjust the radius for circular clipping
+                                      borderRadius: BorderRadius.circular(10),
                                       child: Image.asset(
                                         homeController.images[index],
                                         fit: BoxFit.cover,
@@ -95,12 +97,12 @@ class _Home_componentState extends State<Home_component> {
                                 options: CarouselOptions(
                                   height: 200,
                                   autoPlay: true,
-                                  autoPlayInterval: const Duration(seconds: 2),
+                                  autoPlayInterval: const Duration(seconds: 3),
                                   autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                                  autoPlayCurve: Curves.linear,
-                                  enlargeCenterPage: true, // This makes the center item larger
-                                  aspectRatio: 16 / 9, // Set the aspect ratio as needed
-                                  viewportFraction: 0.8, // Adjust the visible item fraction
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  enlargeCenterPage: true,
+                                  aspectRatio: 16 / 9,
+                                  viewportFraction: 0.8,
                                   pageSnapping: true,
                                   scrollDirection: Axis.horizontal,
                                 ),
@@ -118,10 +120,10 @@ class _Home_componentState extends State<Home_component> {
                                     "Popular",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                                      fontSize: 18,
                                     ),
                                   ),
-                                  OutlinedButton(
+                                  TextButton(
                                     onPressed: () {
                                       homeController.changeIndex(1);
                                     },
@@ -138,6 +140,7 @@ class _Home_componentState extends State<Home_component> {
                                   ),
                                 ],
                               ),
+
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -145,7 +148,7 @@ class _Home_componentState extends State<Home_component> {
                                     ...List.generate(
                                         5,
                                             (index) => Padding(
-                                                padding: const EdgeInsets.all(5),
+                                                padding: const EdgeInsets.all(9),
                                               child: Column(
                                                 children: [
                                                   GestureDetector(
@@ -164,6 +167,10 @@ class _Home_componentState extends State<Home_component> {
                                                       height: 200,
                                                       width: 300,
                                                       decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: MyColor.black,
+                                                            width: 1
+                                                        ),
                                                         image: DecorationImage(
                                                             image: AssetImage(
                                                                 "${popular[index]['image']}"
@@ -174,7 +181,7 @@ class _Home_componentState extends State<Home_component> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Text("${popular[index]['name']}"),
+                                                  // Text("${popular[index]['name']}"),
                                                 ],
                                               ),
                                             ),
@@ -185,53 +192,120 @@ class _Home_componentState extends State<Home_component> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    "Random Quote",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  OutlinedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        fetchRandomQuote();
-                                      });
-                                    },
-                                    child: const Text(
-                                      "Next",
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              GestureDetector(
-                                onTap: () => homeController.changeGradientColor(index),
-                                child: Container(
-                                  height: 300,
-                                  width: 200,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        homeController.containerColors.length > index
-                                            ? homeController.containerColors[index]
-                                            : Colors.red,
-                                        Colors.blue,
-                                      ],
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
+                              Text(
+                                "Motivational",
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
                                 ),
                               ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                physics: BouncingScrollPhysics(),
+                                child: Row(
+                                  children: [
+                                    ...List.generate(
+                                        5,
+                                            (index) =>
+                                                Padding(
+                                                padding: EdgeInsets.all(9),
+                                                  child: Column(
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          attributesController.getCategoryId(
+                                                              val: data[index + 5].id
+                                                          );
+                                                          attributesController.getCategoryName(val: data[index + 5].category_name
+                                                          );
+                                                          getAllQuotes = DBHelper.dbHelper.fetchAllQuotes(id: data[index +5 ].id);
+
+                                                          Get.toNamed('/detail');
+                                                        },
+                                                        child: Container(
+                                                          height: 200,
+                                                          width: 300,
+                                                          decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                              color: MyColor.black,
+                                                              width: 2
+                                                            ),
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                  "${motivational[index]['image']}"
+                                                                ),
+                                                              fit: BoxFit.cover
+                                                            ),
+                                                            borderRadius: BorderRadius.circular(10)
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                            ),
+                                    ).toList(),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              Text("Occasional",
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                physics: const BouncingScrollPhysics(),
+                                child: Row(
+                                  children: [
+                                    ...List.generate(
+                                        5,
+                                            (index) => Padding(
+                                                padding: EdgeInsets.all(5),
+                                              child: Column(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      attributesController.getCategoryId(val: data[index + 10].id);
+                                                      attributesController.getCategoryName(val: data[index + 10].category_name);
+                                                      getAllQuotes = DBHelper.dbHelper.fetchAllQuotes(id: data[index + 10].id);
+                                                      Get.toNamed("/detail");
+                                                    },
+                                                    child: Container(
+                                                      height: 200,
+                                                      width: 300,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: MyColor.black,
+                                                            width: 2
+                                                        ),
+
+                                                        image: DecorationImage(
+                                                          image: AssetImage(
+                                                              "${occasional[index]['image']}"
+                                                          ),
+                                                            fit: BoxFit.cover,
+                                                        ),
+                                                          borderRadius: BorderRadius.circular(10),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                    ).toList(),
+                                  ],
+                                )
+                              )
                             ],
                           ),
                         ),
                         ),
+
+
+
+
                         Padding(padding: const EdgeInsets.all(16),
                           child: Column(
                             children: [

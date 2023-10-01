@@ -1,8 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
-
-
 int index = 0;
 
 List<String> images = [
@@ -42,22 +37,41 @@ List<Map<String, dynamic>> popular = [
   },
 ];
 
-List<Color> containerColor = [
-  // MyColor.red,
-  // MyColor.blue,
-  // MyColor.green,
-  // MyColor.orange,
-  // MyColor.purple,
-  // MyColor.pink,
-  // MyColor.cyan,
-  // MyColor.yellow,
-  Colors.red,
-  Colors.blue,
-  Colors.green,
-  Colors.yellow,
-  Colors.orange,
-  Colors.purple,
-  Colors.pink,
-  Colors.cyan,
+List<Map<String,dynamic>> motivational = [
+
+  {
+    "image": "assets/images/motivation/m1.jpg",
+  },
+  {
+    "image": "assets/images/motivation/m2.jpg",
+  },
+  {
+    "image": "assets/images/motivation/m3.jpg",
+  },
+  {
+    "image": "assets/images/motivation/m4.jpg",
+  },
+  {
+    "image": "assets/images/motivation/m5.jpg",
+  },
 
 ];
+
+List<Map<String,dynamic>> occasional = [
+  {
+    "image": "assets/images/occasional/o1.jpg",
+  },
+  {
+    "image": "assets/images/occasional/o2.jpg",
+  },
+  {
+    "image": "assets/images/occasional/o3.jpg",
+  },
+  {
+    "image": "assets/images/occasional/o4.jpg",
+  },
+  {
+    "image": "assets/images/occasional/o5.jpg",
+  },
+];
+
