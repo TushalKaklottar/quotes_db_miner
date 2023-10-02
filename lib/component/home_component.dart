@@ -218,7 +218,7 @@ class _Home_componentState extends State<Home_component> {
                                                           );
                                                           attributesController.getCategoryName(val: data[index + 5].category_name
                                                           );
-                                                          getAllQuotes = DBHelper.dbHelper.fetchAllQuotes(id: data[index +5 ].id);
+                                                          getAllQuotes = DBHelper.dbHelper.fetchAllQuotes(id: data[index +5].id);
 
                                                           Get.toNamed('/detail');
                                                         },
@@ -262,7 +262,7 @@ class _Home_componentState extends State<Home_component> {
                                     ...List.generate(
                                         5,
                                             (index) => Padding(
-                                                padding: EdgeInsets.all(5),
+                                                padding: const EdgeInsets.all(5),
                                               child: Column(
                                                 children: [
                                                   GestureDetector(
@@ -297,7 +297,61 @@ class _Home_componentState extends State<Home_component> {
                                     ).toList(),
                                   ],
                                 )
-                              )
+                              ),
+
+                              const SizedBox(height: 15),
+                              Text(
+                                "Feelings",
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                physics: BouncingScrollPhysics(),
+                                child: Row(
+                                  children: [
+                                    ...List.generate(
+                                        5,
+                                            (index) => Padding(
+                                                padding: EdgeInsets.all(5),
+                                              child: Column(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      attributesController.getCategoryId(val: data[index + 15].id);
+                                                      attributesController.getCategoryName(val: data[index + 15].category_name);
+                                                      getAllQuotes = DBHelper.dbHelper.fetchAllQuotes(id: data[index + 15].id);
+
+                                                      Get.toNamed("/detail");
+                                                    },
+                                                    child: Container(
+                                                      height: 200,
+                                                      width: 300,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: MyColor.black,
+                                                            width: 2
+                                                        ),
+
+                                                        image: DecorationImage(
+                                                          image: AssetImage(
+                                                              "${feelings[index]['images']}"
+                                                          ),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                        borderRadius: BorderRadius.circular(10),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),

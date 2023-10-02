@@ -78,6 +78,7 @@ flutter:
     - assets/images/carousel_slider/
     - assets/images/motivation/
     - assets/images/occasional/
+    - assets/images/feelings/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
