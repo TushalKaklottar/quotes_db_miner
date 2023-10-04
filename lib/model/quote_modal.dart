@@ -1,4 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quotes_db_miner/export_app.dart';
 
 class QuoteModal {
   String id;

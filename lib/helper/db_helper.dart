@@ -1,14 +1,5 @@
-import 'dart:convert';
-import 'package:quotes_db_miner/model/quote_modal.dart';
-import 'package:quotes_db_miner/controller/database_check_controller.dart';
-import 'package:quotes_db_miner/model/category_database_models.dart';
-import 'package:quotes_db_miner/model/quotes_database_model.dart';
-import 'package:flutter/services.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:quotes_db_miner/export_app.dart';
 import 'package:http/http.dart' as http;
-import 'package:quotes_db_miner/model/quotes_modal.dart';
-import 'package:quotes_db_miner/utils/attributes.dart';
 
 
 

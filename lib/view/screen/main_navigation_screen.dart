@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:quotes_db_miner/component/home_component.dart';
-import 'package:quotes_db_miner/controller/page_controller.dart';
-import 'package:get/get.dart';
-import 'package:quotes_db_miner/utils/app_color.dart';
-import '../../component/add_component.dart';
+import 'package:quotes_db_miner/export_app.dart';
+
 
 class Navigation_Screen extends StatelessWidget {
    Navigation_Screen({super.key});
@@ -29,7 +25,7 @@ class Navigation_Screen extends StatelessWidget {
            () => BottomNavigationBar(
               backgroundColor: MyColor.greenAccent,
               selectedItemColor: MyColor.black,
-              unselectedItemColor: MyColor.black87,
+              unselectedItemColor: MyColor.black54,
               showUnselectedLabels: false,
               onTap: (index) {
                 controller.Change_Inedex(index: index);

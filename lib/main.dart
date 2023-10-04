@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:quotes_db_miner/view/screen/detail_screen.dart';
-import 'package:quotes_db_miner/view/screen/main_navigation_screen.dart';
-import 'package:quotes_db_miner/view/screen/spalsh_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quotes_db_miner/export_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +26,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/',
-          page: () =>  Splash_Screen(),
+          page: () =>  const Splash_Screen(),
         ),
 
         GetPage(
@@ -44,7 +38,7 @@ class MyApp extends StatelessWidget {
 
         GetPage(
             name:  '/detail',
-            page: () => Detail_Screen(),
+            page: () => const Detail_Screen(),
         ),
 
       ],

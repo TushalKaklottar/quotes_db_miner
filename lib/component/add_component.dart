@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:quotes_db_miner/export_app.dart';
 
 class Add_component extends StatelessWidget {
   const Add_component({super.key});

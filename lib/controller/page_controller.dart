@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:quotes_db_miner/export_app.dart';
+
 
 class NavigationController extends GetxController {
 

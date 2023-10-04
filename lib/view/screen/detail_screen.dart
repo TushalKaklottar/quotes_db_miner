@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:quotes_db_miner/export_app.dart';
 
 class Detail_Screen extends StatelessWidget {
   const Detail_Screen({super.key});

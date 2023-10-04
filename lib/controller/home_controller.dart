@@ -1,8 +1,4 @@
-import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:quotes_db_miner/helper/db_helper.dart';
-import 'package:quotes_db_miner/model/quote_modal.dart';
+import 'package:quotes_db_miner/export_app.dart';
 
 
 class HomeController extends GetxController {

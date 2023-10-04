@@ -1,15 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:quotes_db_miner/helper/db_helper.dart';
-import 'package:quotes_db_miner/model/category_database_models.dart';
-import 'package:quotes_db_miner/model/quote_modal.dart';
-import 'package:quotes_db_miner/utils/app_color.dart';
-import 'package:quotes_db_miner/utils/attributes.dart';
-import 'package:quotes_db_miner/utils/list.dart';
-import '../controller/attributes_controller.dart';
-import '../controller/home_controller.dart';
+import 'package:quotes_db_miner/export_app.dart';
+
 
 
 class Home_component extends StatefulWidget {
@@ -24,7 +14,6 @@ class _Home_componentState extends State<Home_component> {
 
    AttributesController attributesController = Get.put(AttributesController());
    HomeController homeController = Get.put(HomeController());
-
 
  QuoteModal? quote;
 
@@ -95,7 +84,7 @@ class _Home_componentState extends State<Home_component> {
                                   );
                                 },
                                 options: CarouselOptions(
-                                  height: 200,
+                                  height: AppSize.height / 4,
                                   autoPlay: true,
                                   autoPlayInterval: const Duration(seconds: 3),
                                   autoPlayAnimationDuration: const Duration(milliseconds: 800),
@@ -107,8 +96,6 @@ class _Home_componentState extends State<Home_component> {
                                   scrollDirection: Axis.horizontal,
                                 ),
                               ),
-
-
                               const SizedBox(
                                 height: 30,
                               ),
@@ -116,23 +103,21 @@ class _Home_componentState extends State<Home_component> {
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
+                                   Text(
                                     "Popular",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
+                                    style: tittleText,
                                   ),
                                   TextButton(
                                     onPressed: () {
                                       homeController.changeIndex(1);
                                     },
                                     child: Row(
-                                      children: const [
+                                      children:  [
                                         Text(
                                           "See More",
+                                          style: buttonText,
                                         ),
-                                        Icon(
+                                        const Icon(
                                           Icons.expand_more,
                                         ),
                                       ],
@@ -140,7 +125,6 @@ class _Home_componentState extends State<Home_component> {
                                   ),
                                 ],
                               ),
-
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -194,10 +178,7 @@ class _Home_componentState extends State<Home_component> {
                               ),
                               Text(
                                 "Motivational",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
-                                ),
+                                style: tittleText,
                               ),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
@@ -249,10 +230,7 @@ class _Home_componentState extends State<Home_component> {
                               ),
                               const SizedBox(height: 15),
                               Text("Occasional",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
-                                ),
+                                style: tittleText,
                               ),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
@@ -302,14 +280,11 @@ class _Home_componentState extends State<Home_component> {
                               const SizedBox(height: 15),
                               Text(
                                 "Feelings",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
-                                ),
+                                style: tittleText,
                               ),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 child: Row(
                                   children: [
                                     ...List.generate(
@@ -395,13 +370,12 @@ class _Home_componentState extends State<Home_component> {
                 );
               }
             }
-
             return const Center(
               child: CircularProgressIndicator(),
             );
           },
         ),
-        backgroundColor: Colors.grey.shade100,
+        backgroundColor: MyColor.grey100,
       ),
     );
   }

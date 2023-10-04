@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
-import 'package:quotes_db_miner/model/attributes_modal.dart';
-import 'package:quotes_db_miner/utils/list.dart';
+import 'package:quotes_db_miner/export_app.dart';
 
 class AttributesController extends GetxController {
 

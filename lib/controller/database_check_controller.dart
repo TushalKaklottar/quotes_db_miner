@@ -1,6 +1,5 @@
-import 'package:get/get.dart';
-import 'package:quotes_db_miner/model/database_check_model.dart';
-import 'package:quotes_db_miner/utils/attributes.dart';
+import 'package:quotes_db_miner/export_app.dart';
+
 
 class DataBaseCheckController extends GetxController {
 
