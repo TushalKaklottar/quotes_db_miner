@@ -75,22 +75,3 @@ List<Map<String,dynamic>> occasional = [
   },
 ];
 
-List<Map<String,dynamic>> feelings = [
-
-  {
-    "images": "assets/images/feelings/f1.jpg"
-  },
-  {
-    "images": "assets/images/feelings/f2.jpg"
-  },
-  {
-    "images": "assets/images/feelings/f3.jpg"
-  },
-  {
-    "images": "assets/images/feelings/f4.jpg"
-  },
-  {
-    "images": "assets/images/feelings/f5.jpg"
-  },
-
-];

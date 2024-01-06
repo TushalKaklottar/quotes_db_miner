@@ -1,7 +1,5 @@
 import 'package:quotes_db_miner/export_app.dart';
 
-
-
 class Home_component extends StatefulWidget {
   const Home_component({super.key});
 
@@ -139,16 +137,14 @@ class _Home_componentState extends State<Home_component> {
                                                     onTap: () {
                                                       attributesController.
                                                       getCategoryId(val: data[index].id);
-
                                                       attributesController.
                                                       getCategoryName(val: data[index].category_name);
-
-                                                      getAllQuotes = DBHelper.dbHelper.fetchAllQuotes(id: data[index].id);
-
+                                                      getAllQuotes = DBHelper.dbHelper.fetchAllQuotes(id: data[index].id
+                                                      );
                                                       Get.toNamed("/detail");
                                                     },
                                                     child: Container(
-                                                      height: 200,
+                                                      height: AppSize.height / 3,
                                                       width: 300,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
@@ -189,7 +185,7 @@ class _Home_componentState extends State<Home_component> {
                                         5,
                                             (index) =>
                                                 Padding(
-                                                padding: EdgeInsets.all(9),
+                                                padding: const EdgeInsets.all(9),
                                                   child: Column(
                                                     children: [
                                                       GestureDetector(
@@ -276,66 +272,14 @@ class _Home_componentState extends State<Home_component> {
                                   ],
                                 )
                               ),
-
-                              const SizedBox(height: 15),
-                              Text(
-                                "Feelings",
-                                style: tittleText,
-                              ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                physics: const BouncingScrollPhysics(),
-                                child: Row(
-                                  children: [
-                                    ...List.generate(
-                                        5,
-                                            (index) => Padding(
-                                                padding: EdgeInsets.all(5),
-                                              child: Column(
-                                                children: [
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      attributesController.getCategoryId(val: data[index + 15].id);
-                                                      attributesController.getCategoryName(val: data[index + 15].category_name);
-                                                      getAllQuotes = DBHelper.dbHelper.fetchAllQuotes(id: data[index + 15].id);
-
-                                                      Get.toNamed("/detail");
-                                                    },
-                                                    child: Container(
-                                                      height: 200,
-                                                      width: 300,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            color: MyColor.black,
-                                                            width: 2
-                                                        ),
-
-                                                        image: DecorationImage(
-                                                          image: AssetImage(
-                                                              "${feelings[index]['images']}"
-                                                          ),
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                        borderRadius: BorderRadius.circular(10),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ],
                           ),
                         ),
                         ),
 
 
-
-
-                        Padding(padding: const EdgeInsets.all(16),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
                           child: Column(
                             children: [
                               const SizedBox(

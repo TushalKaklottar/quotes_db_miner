@@ -17,11 +17,11 @@ class QuoteModal {
 
   factory QuoteModal.fromMap(Map<String,dynamic> data) {
     return QuoteModal(
-        id: data['_id'],
-        content: data['content'],
-        author: data['author'],
-        authorSlug: data['authorSlug'],
-        text: data['text'],
+        id: data['_id'] ?? '',
+        content: data['content'] ?? '',
+        author: data['author'] ?? '',
+        authorSlug: data['authorSlug'] ?? '',
+        text: data['text'] ?? '',
     );
   }
 }
