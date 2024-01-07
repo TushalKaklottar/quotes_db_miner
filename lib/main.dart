@@ -2,9 +2,7 @@ import 'package:quotes_db_miner/export_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await GetStorage.init();
-
   runApp(
     const MyApp(),
   );
@@ -31,14 +29,14 @@ class MyApp extends StatelessWidget {
 
         GetPage(
             name: '/home',
-            page: () =>  Navigation_Screen(),
+            page: () =>  NavigationScreen(),
           transition: Transition.downToUp,
           curve: Curves.easeInOutCubic,
         ),
 
         GetPage(
             name:  '/detail',
-            page: () => const Detail_Screen(),
+            page: () =>  DetailScreen(),
         ),
 
       ],

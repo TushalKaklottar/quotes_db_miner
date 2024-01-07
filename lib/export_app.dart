@@ -14,11 +14,10 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'package:get_storage/get_storage.dart';
 
 // component
-export 'package:quotes_db_miner/component/home_component.dart';
-export '../../component/add_component.dart';
+
 
 // view
-export 'package:quotes_db_miner/view/screen/detail_screen.dart';
+export 'package:quotes_db_miner/view/screen/detail_page.dart';
 export 'package:quotes_db_miner/view/screen/main_navigation_screen.dart';
 export 'package:quotes_db_miner/view/screen/splash_screen.dart';
 

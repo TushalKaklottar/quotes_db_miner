@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:quotes_db_miner/export_app.dart';
 
+import 'component/add_component.dart';
+import 'component/home_component.dart';
 
-class Navigation_Screen extends StatelessWidget {
-   Navigation_Screen({super.key});
+
+class NavigationScreen extends StatelessWidget {
+   NavigationScreen({super.key});
 
    NavigationController controller = Get.put(NavigationController());
 
@@ -15,10 +18,10 @@ class Navigation_Screen extends StatelessWidget {
             controller.Change_Inedex(index: index);
           },
           controller: controller.pageController,
-          children:  [
-            Home_component(),
+          children:  const [
+            HomeComponent(),
             Add_component(),
-            Home_component(),
+            HomeComponent(),
           ],
         ),
         bottomNavigationBar: Obx(

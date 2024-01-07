@@ -2,6 +2,23 @@ import 'package:quotes_db_miner/export_app.dart';
 
 class AttributesController extends GetxController {
 
+  final RxList<Color> containerColors = <Color>[].obs;
+
+  final RxInt currentIndex = 0.obs;
+
+  void changeGradientColor(int index) {
+    if (containerColors.length <= index) {
+      containerColors.add(getRandomColor());
+    } else {
+      containerColors[index] = getRandomColor();
+    }
+  }
+
+  Color getRandomColor() {
+    return Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0)
+        .withOpacity(1.0);
+  }
+
   AttributesModel attributesModel = AttributesModel(
       id: 0,
       categoryname: "Love",

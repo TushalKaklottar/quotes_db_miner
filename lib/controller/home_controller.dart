@@ -36,9 +36,7 @@ class HomeController extends GetxController {
     "assets/images/carousel_slider/4.png",
     "assets/images/carousel_slider/5.png",
     "assets/images/carousel_slider/6.png",
-
   ];
-
   void updateIndex(int index) {
     currentIndex.value = index;
   }
